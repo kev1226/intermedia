@@ -1,8 +1,8 @@
 name: Test DockerHub Secrets
 
 on:
-  workflow_dispatch:  # Para que puedas correrlo manualmente desde GitHub Actions
-
+  push:
+    main
 jobs:
   check-secrets:
     runs-on: ubuntu-latest
