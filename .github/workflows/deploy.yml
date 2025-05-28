@@ -6,7 +6,6 @@ on:
       - main
 
 env:
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
   BACKEND_PORT: 4000
   FRONTEND_PORT: 5173
 
@@ -26,13 +25,13 @@ jobs:
 
       - name: Build and push backend image
         run: |
-          BACKEND_IMAGE="${DOCKERHUB_USERNAME}/back:latest"
+          BACKEND_IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/back:latest"
           docker build -t $BACKEND_IMAGE ./BACKEND
           docker push $BACKEND_IMAGE
 
       - name: Build and push frontend image
         run: |
-          FRONTEND_IMAGE="${DOCKERHUB_USERNAME}/front:latest"
+          FRONTEND_IMAGE="${{ secrets.DOCKERHUB_USERNAME }}/front:latest"
           docker build -t $FRONTEND_IMAGE ./frontend
           docker push $FRONTEND_IMAGE
 
