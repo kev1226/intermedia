@@ -5,7 +5,7 @@ function App() {
   const [clima, setClima] = useState(null)
 
   useEffect(()=>{
-    fetch('http://localhost:4000/api/clima?ciudad=Quito')
+    fetch('http://3.83.119.229:4000/api/clima?ciudad=Quito')
     .then(res => res.json())
     .then(data => setClima(data))
     .catch(err => console.error(err))
