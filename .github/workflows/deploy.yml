@@ -32,7 +32,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: docker/build-push-action@v5
         with:
-          context: ./BACKEND
+          context: ./BACKEND          # Verifica que esta ruta sea correcta (mayúsculas)
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/back:latest
 
@@ -40,7 +40,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
+          context: ./frontend        # Verifica que esta ruta sea correcta
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/front:latest
 
@@ -52,14 +52,13 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # Parar y eliminar contenedor backend si existe
+            # Detener y eliminar contenedores si existen
             docker stop back || true
             docker rm back || true
-            # Parar y eliminar contenedor frontend si existe
             docker stop front || true
             docker rm front || true
 
-            # Descargar últimas imágenes
+            # Descargar las últimas imágenes
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/back:latest
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/front:latest
 
